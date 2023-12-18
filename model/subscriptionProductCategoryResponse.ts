@@ -11,36 +11,36 @@
  */
 
 import { RequestFile } from './models';
-import { ProductResponse } from './productResponse';
+import { SubscriptionProductResponse } from './subscriptionProductResponse';
 
-export class ProductCategoryResponse {
+export class SubscriptionProductCategoryResponse {
     /**
-    * The unique identifier for the product category.
+    * The unique identifier for the subscription product category.
     */
-    'productCategoryId': string;
+    'subscriptionProductCategoryId': string;
     /**
-    * The identifier of the organization that the product category belongs to.
+    * The identifier of the organization that the subscription product category belongs to.
     */
     'orgId': string;
     /**
-    * The name of the product category.
+    * The name of the subscription product category.
     */
     'name': string;
     /**
-    * The display order of the product category.
+    * The display order of the subscription product category.
     */
     'displayOrder': number;
     /**
-    * The products in this product category.
+    * The subscription products in this subscription product category.
     */
-    'items': Array<ProductResponse>;
+    'subscriptionItems': Array<SubscriptionProductResponse>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "productCategoryId",
-            "baseName": "productCategoryId",
+            "name": "subscriptionProductCategoryId",
+            "baseName": "subscriptionProductCategoryId",
             "type": "string"
         },
         {
@@ -59,13 +59,13 @@ export class ProductCategoryResponse {
             "type": "number"
         },
         {
-            "name": "items",
-            "baseName": "items",
-            "type": "Array<ProductResponse>"
+            "name": "subscriptionItems",
+            "baseName": "subscriptionItems",
+            "type": "Array<SubscriptionProductResponse>"
         }    ];
 
     static getAttributeTypeMap() {
-        return ProductCategoryResponse.attributeTypeMap;
+        return SubscriptionProductCategoryResponse.attributeTypeMap;
     }
 }
 

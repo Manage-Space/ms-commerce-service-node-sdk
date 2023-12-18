@@ -49,10 +49,6 @@ export class ProductSiteResponse {
     * Organization Id
     */
     'orgId': string;
-    /**
-    * Payment provider ID
-    */
-    'paymentProviderId': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -100,11 +96,6 @@ export class ProductSiteResponse {
         {
             "name": "orgId",
             "baseName": "orgId",
-            "type": "string"
-        },
-        {
-            "name": "paymentProviderId",
-            "baseName": "paymentProviderId",
             "type": "string"
         }    ];
 

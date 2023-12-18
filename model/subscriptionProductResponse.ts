@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { SubscriptionProductMetaData } from './subscriptionProductMetaData';
 
 export class SubscriptionProductResponse {
     /**
@@ -30,13 +31,10 @@ export class SubscriptionProductResponse {
     */
     'imagePath': string | null;
     /**
-    * Product Category Id
+    * Subscription Product Category Id
     */
-    'productCategoryId': string;
-    /**
-    * Meta Data
-    */
-    'metaData': object;
+    'subscriptionProductCategoryId': string;
+    'metaData': SubscriptionProductMetaData;
     /**
     * Time of creation
     */
@@ -78,14 +76,14 @@ export class SubscriptionProductResponse {
             "type": "string"
         },
         {
-            "name": "productCategoryId",
-            "baseName": "productCategoryId",
+            "name": "subscriptionProductCategoryId",
+            "baseName": "subscriptionProductCategoryId",
             "type": "string"
         },
         {
             "name": "metaData",
             "baseName": "metaData",
-            "type": "object"
+            "type": "SubscriptionProductMetaData"
         },
         {
             "name": "createdAt",

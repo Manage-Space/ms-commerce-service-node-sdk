@@ -24,7 +24,7 @@ export class CreateSubscriptionProductRequest {
     /**
     * Product Category ID
     */
-    'productCategoryId': string;
+    'subscriptionProductCategoryId': string;
     /**
     * Image path for the subscription product
     */
@@ -48,8 +48,8 @@ export class CreateSubscriptionProductRequest {
             "type": "string"
         },
         {
-            "name": "productCategoryId",
-            "baseName": "productCategoryId",
+            "name": "subscriptionProductCategoryId",
+            "baseName": "subscriptionProductCategoryId",
             "type": "string"
         },
         {

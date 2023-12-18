@@ -12,13 +12,13 @@
 
 import { RequestFile } from './models';
 
-export class UpdateProductCategoryRequest {
+export class UpdateSubscriptionProductCategoryRequest {
     /**
-    * The name of the product category.
+    * The name of the subscription product category.
     */
     'name'?: string;
     /**
-    * The display order of the product category.
+    * The display order of the subscription product category.
     */
     'displayOrder'?: number;
 
@@ -37,7 +37,7 @@ export class UpdateProductCategoryRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateProductCategoryRequest.attributeTypeMap;
+        return UpdateSubscriptionProductCategoryRequest.attributeTypeMap;
     }
 }
 

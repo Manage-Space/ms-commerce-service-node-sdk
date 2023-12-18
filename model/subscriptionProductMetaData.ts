@@ -12,32 +12,20 @@
 
 import { RequestFile } from './models';
 
-export class UpdateProductCategoryRequest {
-    /**
-    * The name of the product category.
-    */
-    'name'?: string;
-    /**
-    * The display order of the product category.
-    */
-    'displayOrder'?: number;
+export class SubscriptionProductMetaData {
+    'coverLevel'?: number;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "displayOrder",
-            "baseName": "displayOrder",
+            "name": "coverLevel",
+            "baseName": "coverLevel",
             "type": "number"
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateProductCategoryRequest.attributeTypeMap;
+        return SubscriptionProductMetaData.attributeTypeMap;
     }
 }
 

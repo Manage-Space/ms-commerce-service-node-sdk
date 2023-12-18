@@ -24,7 +24,7 @@ export class SubscriptionProductSiteResponse {
     /**
     * Product Category Id
     */
-    'productCategoryId': string;
+    'subscriptionProductCategoryId': string;
     /**
     * Identifier of subscription product.
     */
@@ -52,8 +52,8 @@ export class SubscriptionProductSiteResponse {
             "type": "number"
         },
         {
-            "name": "productCategoryId",
-            "baseName": "productCategoryId",
+            "name": "subscriptionProductCategoryId",
+            "baseName": "subscriptionProductCategoryId",
             "type": "string"
         },
         {

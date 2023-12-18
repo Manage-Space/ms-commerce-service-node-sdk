@@ -1,7 +1,5 @@
 import localVarRequest from 'request';
 
-export * from './addLeaseItemsRequest';
-export * from './addProductItemsRequest';
 export * from './badRequestError400Response';
 export * from './badRequestError400ResponseError';
 export * from './baseCategory';
@@ -13,24 +11,16 @@ export * from './cartItem';
 export * from './cartItemResponse';
 export * from './cartItemStatus';
 export * from './cartItemTaxResponse';
-export * from './cartLeaseItemRequest';
-export * from './cartLeaseItemResponse';
-export * from './cartProductItemRequest';
-export * from './cartProductItemResponse';
-export * from './cartResponse';
 export * from './cartStatus';
-export * from './cartStatusResponse';
 export * from './cartSubscriptionItem';
 export * from './cartSubscriptionItemResponse';
 export * from './cartSubscriptionItemUnitResponse';
 export * from './cartV2Response';
-export * from './checkoutRequest';
 export * from './createActiveCartRequest';
 export * from './createCartFees201Response';
 export * from './createCartFeesRequest';
 export * from './createCartItems201Response';
 export * from './createCartItemsRequest';
-export * from './createCartRequest';
 export * from './createCartSubscriptionItems201Response';
 export * from './createCartSubscriptionItemsRequest';
 export * from './createCategoriesRequest';
@@ -41,6 +31,8 @@ export * from './createProductRequest';
 export * from './createProductSiteRequest';
 export * from './createProductSitesRequest';
 export * from './createSubscriptionProduct201Response';
+export * from './createSubscriptionProductCategoriesRequest';
+export * from './createSubscriptionProductCategoryRequest';
 export * from './createSubscriptionProductRequest';
 export * from './createSubscriptionProductSiteRequest';
 export * from './createSubscriptionProductSitesRequest';
@@ -49,11 +41,11 @@ export * from './feeTypeResponse';
 export * from './forbiddenError403Response';
 export * from './forbiddenError403ResponseError';
 export * from './getActiveCarts200Response';
-export * from './getCartByUserId201Response';
 export * from './getFeeTypes200Response';
 export * from './getFeesBySite200Response';
 export * from './getProductCategories200Response';
 export * from './getProductSiteRecords200Response';
+export * from './getSubscriptionProductCategories200Response';
 export * from './getSubscriptionProductSiteRecords200Response';
 export * from './internalServerError500Response';
 export * from './internalServerError500ResponseError';
@@ -64,7 +56,9 @@ export * from './productCategoryResponse';
 export * from './productItemRequest';
 export * from './productResponse';
 export * from './productSiteResponse';
+export * from './subscriptionProductCategoryResponse';
 export * from './subscriptionProductItemRequest';
+export * from './subscriptionProductMetaData';
 export * from './subscriptionProductResponse';
 export * from './subscriptionProductSiteResponse';
 export * from './unauthorizedError401Response';
@@ -73,6 +67,7 @@ export * from './updateFeeRequest';
 export * from './updateProductCategoryRequest';
 export * from './updateProductRequest';
 export * from './updateProductSiteRequest';
+export * from './updateSubscriptionProductCategoryRequest';
 export * from './updateSubscriptionProductRequest';
 export * from './updateSubscriptionProductSiteRequest';
 
@@ -89,8 +84,6 @@ export interface RequestDetailedFile {
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 
-import { AddLeaseItemsRequest } from './addLeaseItemsRequest';
-import { AddProductItemsRequest } from './addProductItemsRequest';
 import { BadRequestError400Response } from './badRequestError400Response';
 import { BadRequestError400ResponseError } from './badRequestError400ResponseError';
 import { BaseCategory } from './baseCategory';
@@ -102,24 +95,16 @@ import { CartItem } from './cartItem';
 import { CartItemResponse } from './cartItemResponse';
 import { CartItemStatus } from './cartItemStatus';
 import { CartItemTaxResponse } from './cartItemTaxResponse';
-import { CartLeaseItemRequest } from './cartLeaseItemRequest';
-import { CartLeaseItemResponse } from './cartLeaseItemResponse';
-import { CartProductItemRequest } from './cartProductItemRequest';
-import { CartProductItemResponse } from './cartProductItemResponse';
-import { CartResponse } from './cartResponse';
 import { CartStatus } from './cartStatus';
-import { CartStatusResponse } from './cartStatusResponse';
 import { CartSubscriptionItem } from './cartSubscriptionItem';
 import { CartSubscriptionItemResponse } from './cartSubscriptionItemResponse';
 import { CartSubscriptionItemUnitResponse } from './cartSubscriptionItemUnitResponse';
 import { CartV2Response } from './cartV2Response';
-import { CheckoutRequest } from './checkoutRequest';
 import { CreateActiveCartRequest } from './createActiveCartRequest';
 import { CreateCartFees201Response } from './createCartFees201Response';
 import { CreateCartFeesRequest } from './createCartFeesRequest';
 import { CreateCartItems201Response } from './createCartItems201Response';
 import { CreateCartItemsRequest } from './createCartItemsRequest';
-import { CreateCartRequest } from './createCartRequest';
 import { CreateCartSubscriptionItems201Response } from './createCartSubscriptionItems201Response';
 import { CreateCartSubscriptionItemsRequest } from './createCartSubscriptionItemsRequest';
 import { CreateCategoriesRequest } from './createCategoriesRequest';
@@ -130,6 +115,8 @@ import { CreateProductRequest } from './createProductRequest';
 import { CreateProductSiteRequest } from './createProductSiteRequest';
 import { CreateProductSitesRequest } from './createProductSitesRequest';
 import { CreateSubscriptionProduct201Response } from './createSubscriptionProduct201Response';
+import { CreateSubscriptionProductCategoriesRequest } from './createSubscriptionProductCategoriesRequest';
+import { CreateSubscriptionProductCategoryRequest } from './createSubscriptionProductCategoryRequest';
 import { CreateSubscriptionProductRequest } from './createSubscriptionProductRequest';
 import { CreateSubscriptionProductSiteRequest } from './createSubscriptionProductSiteRequest';
 import { CreateSubscriptionProductSitesRequest } from './createSubscriptionProductSitesRequest';
@@ -138,11 +125,11 @@ import { FeeTypeResponse } from './feeTypeResponse';
 import { ForbiddenError403Response } from './forbiddenError403Response';
 import { ForbiddenError403ResponseError } from './forbiddenError403ResponseError';
 import { GetActiveCarts200Response } from './getActiveCarts200Response';
-import { GetCartByUserId201Response } from './getCartByUserId201Response';
 import { GetFeeTypes200Response } from './getFeeTypes200Response';
 import { GetFeesBySite200Response } from './getFeesBySite200Response';
 import { GetProductCategories200Response } from './getProductCategories200Response';
 import { GetProductSiteRecords200Response } from './getProductSiteRecords200Response';
+import { GetSubscriptionProductCategories200Response } from './getSubscriptionProductCategories200Response';
 import { GetSubscriptionProductSiteRecords200Response } from './getSubscriptionProductSiteRecords200Response';
 import { InternalServerError500Response } from './internalServerError500Response';
 import { InternalServerError500ResponseError } from './internalServerError500ResponseError';
@@ -153,7 +140,9 @@ import { ProductCategoryResponse } from './productCategoryResponse';
 import { ProductItemRequest } from './productItemRequest';
 import { ProductResponse } from './productResponse';
 import { ProductSiteResponse } from './productSiteResponse';
+import { SubscriptionProductCategoryResponse } from './subscriptionProductCategoryResponse';
 import { SubscriptionProductItemRequest } from './subscriptionProductItemRequest';
+import { SubscriptionProductMetaData } from './subscriptionProductMetaData';
 import { SubscriptionProductResponse } from './subscriptionProductResponse';
 import { SubscriptionProductSiteResponse } from './subscriptionProductSiteResponse';
 import { UnauthorizedError401Response } from './unauthorizedError401Response';
@@ -162,6 +151,7 @@ import { UpdateFeeRequest } from './updateFeeRequest';
 import { UpdateProductCategoryRequest } from './updateProductCategoryRequest';
 import { UpdateProductRequest } from './updateProductRequest';
 import { UpdateProductSiteRequest } from './updateProductSiteRequest';
+import { UpdateSubscriptionProductCategoryRequest } from './updateSubscriptionProductCategoryRequest';
 import { UpdateSubscriptionProductRequest } from './updateSubscriptionProductRequest';
 import { UpdateSubscriptionProductSiteRequest } from './updateSubscriptionProductSiteRequest';
 
@@ -185,8 +175,6 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
-    "AddLeaseItemsRequest": AddLeaseItemsRequest,
-    "AddProductItemsRequest": AddProductItemsRequest,
     "BadRequestError400Response": BadRequestError400Response,
     "BadRequestError400ResponseError": BadRequestError400ResponseError,
     "BaseCategory": BaseCategory,
@@ -197,23 +185,15 @@ let typeMap: {[index: string]: any} = {
     "CartItem": CartItem,
     "CartItemResponse": CartItemResponse,
     "CartItemTaxResponse": CartItemTaxResponse,
-    "CartLeaseItemRequest": CartLeaseItemRequest,
-    "CartLeaseItemResponse": CartLeaseItemResponse,
-    "CartProductItemRequest": CartProductItemRequest,
-    "CartProductItemResponse": CartProductItemResponse,
-    "CartResponse": CartResponse,
-    "CartStatusResponse": CartStatusResponse,
     "CartSubscriptionItem": CartSubscriptionItem,
     "CartSubscriptionItemResponse": CartSubscriptionItemResponse,
     "CartSubscriptionItemUnitResponse": CartSubscriptionItemUnitResponse,
     "CartV2Response": CartV2Response,
-    "CheckoutRequest": CheckoutRequest,
     "CreateActiveCartRequest": CreateActiveCartRequest,
     "CreateCartFees201Response": CreateCartFees201Response,
     "CreateCartFeesRequest": CreateCartFeesRequest,
     "CreateCartItems201Response": CreateCartItems201Response,
     "CreateCartItemsRequest": CreateCartItemsRequest,
-    "CreateCartRequest": CreateCartRequest,
     "CreateCartSubscriptionItems201Response": CreateCartSubscriptionItems201Response,
     "CreateCartSubscriptionItemsRequest": CreateCartSubscriptionItemsRequest,
     "CreateCategoriesRequest": CreateCategoriesRequest,
@@ -224,6 +204,8 @@ let typeMap: {[index: string]: any} = {
     "CreateProductSiteRequest": CreateProductSiteRequest,
     "CreateProductSitesRequest": CreateProductSitesRequest,
     "CreateSubscriptionProduct201Response": CreateSubscriptionProduct201Response,
+    "CreateSubscriptionProductCategoriesRequest": CreateSubscriptionProductCategoriesRequest,
+    "CreateSubscriptionProductCategoryRequest": CreateSubscriptionProductCategoryRequest,
     "CreateSubscriptionProductRequest": CreateSubscriptionProductRequest,
     "CreateSubscriptionProductSiteRequest": CreateSubscriptionProductSiteRequest,
     "CreateSubscriptionProductSitesRequest": CreateSubscriptionProductSitesRequest,
@@ -232,11 +214,11 @@ let typeMap: {[index: string]: any} = {
     "ForbiddenError403Response": ForbiddenError403Response,
     "ForbiddenError403ResponseError": ForbiddenError403ResponseError,
     "GetActiveCarts200Response": GetActiveCarts200Response,
-    "GetCartByUserId201Response": GetCartByUserId201Response,
     "GetFeeTypes200Response": GetFeeTypes200Response,
     "GetFeesBySite200Response": GetFeesBySite200Response,
     "GetProductCategories200Response": GetProductCategories200Response,
     "GetProductSiteRecords200Response": GetProductSiteRecords200Response,
+    "GetSubscriptionProductCategories200Response": GetSubscriptionProductCategories200Response,
     "GetSubscriptionProductSiteRecords200Response": GetSubscriptionProductSiteRecords200Response,
     "InternalServerError500Response": InternalServerError500Response,
     "InternalServerError500ResponseError": InternalServerError500ResponseError,
@@ -247,7 +229,9 @@ let typeMap: {[index: string]: any} = {
     "ProductItemRequest": ProductItemRequest,
     "ProductResponse": ProductResponse,
     "ProductSiteResponse": ProductSiteResponse,
+    "SubscriptionProductCategoryResponse": SubscriptionProductCategoryResponse,
     "SubscriptionProductItemRequest": SubscriptionProductItemRequest,
+    "SubscriptionProductMetaData": SubscriptionProductMetaData,
     "SubscriptionProductResponse": SubscriptionProductResponse,
     "SubscriptionProductSiteResponse": SubscriptionProductSiteResponse,
     "UnauthorizedError401Response": UnauthorizedError401Response,
@@ -256,6 +240,7 @@ let typeMap: {[index: string]: any} = {
     "UpdateProductCategoryRequest": UpdateProductCategoryRequest,
     "UpdateProductRequest": UpdateProductRequest,
     "UpdateProductSiteRequest": UpdateProductSiteRequest,
+    "UpdateSubscriptionProductCategoryRequest": UpdateSubscriptionProductCategoryRequest,
     "UpdateSubscriptionProductRequest": UpdateSubscriptionProductRequest,
     "UpdateSubscriptionProductSiteRequest": UpdateSubscriptionProductSiteRequest,
 }

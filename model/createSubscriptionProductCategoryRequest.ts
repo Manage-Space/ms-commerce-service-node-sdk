@@ -11,16 +11,21 @@
  */
 
 import { RequestFile } from './models';
+import { SubscriptionProductItemRequest } from './subscriptionProductItemRequest';
 
-export class UpdateProductCategoryRequest {
+export class CreateSubscriptionProductCategoryRequest {
     /**
-    * The name of the product category.
+    * The name of the subscription product category.
     */
-    'name'?: string;
+    'name': string;
     /**
-    * The display order of the product category.
+    * The display order of the subscription product category.
     */
     'displayOrder'?: number;
+    /**
+    * Subscription products to be created within the category.
+    */
+    'subscriptionItems'?: Array<SubscriptionProductItemRequest>;
 
     static discriminator: string | undefined = undefined;
 
@@ -34,10 +39,15 @@ export class UpdateProductCategoryRequest {
             "name": "displayOrder",
             "baseName": "displayOrder",
             "type": "number"
+        },
+        {
+            "name": "subscriptionItems",
+            "baseName": "subscriptionItems",
+            "type": "Array<SubscriptionProductItemRequest>"
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateProductCategoryRequest.attributeTypeMap;
+        return CreateSubscriptionProductCategoryRequest.attributeTypeMap;
     }
 }
 

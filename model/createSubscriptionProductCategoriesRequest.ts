@@ -11,33 +11,25 @@
  */
 
 import { RequestFile } from './models';
+import { BaseCategory } from './baseCategory';
 
-export class UpdateProductCategoryRequest {
+export class CreateSubscriptionProductCategoriesRequest {
     /**
-    * The name of the product category.
+    * Subscription Product Categories + products
     */
-    'name'?: string;
-    /**
-    * The display order of the product category.
-    */
-    'displayOrder'?: number;
+    'subscriptionProductCategories': Array<BaseCategory>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "displayOrder",
-            "baseName": "displayOrder",
-            "type": "number"
+            "name": "subscriptionProductCategories",
+            "baseName": "subscriptionProductCategories",
+            "type": "Array<BaseCategory>"
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateProductCategoryRequest.attributeTypeMap;
+        return CreateSubscriptionProductCategoriesRequest.attributeTypeMap;
     }
 }
 

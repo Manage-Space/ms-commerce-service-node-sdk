@@ -12,7 +12,6 @@
 
 import { RequestFile } from './models';
 import { ProductItemRequest } from './productItemRequest';
-import { SubscriptionProductItemRequest } from './subscriptionProductItemRequest';
 
 export class BaseCategory {
     /**
@@ -27,10 +26,6 @@ export class BaseCategory {
     * Products to be created within the category.
     */
     'items'?: Array<ProductItemRequest>;
-    /**
-    * Subscription products to be created within the category.
-    */
-    'subscriptionItems'?: Array<SubscriptionProductItemRequest>;
 
     static discriminator: string | undefined = undefined;
 
@@ -49,11 +44,6 @@ export class BaseCategory {
             "name": "items",
             "baseName": "items",
             "type": "Array<ProductItemRequest>"
-        },
-        {
-            "name": "subscriptionItems",
-            "baseName": "subscriptionItems",
-            "type": "Array<SubscriptionProductItemRequest>"
         }    ];
 
     static getAttributeTypeMap() {

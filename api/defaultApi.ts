@@ -15,16 +15,12 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { AddLeaseItemsRequest } from '../model/addLeaseItemsRequest';
-import { AddProductItemsRequest } from '../model/addProductItemsRequest';
 import { BadRequestError400Response } from '../model/badRequestError400Response';
-import { CheckoutRequest } from '../model/checkoutRequest';
 import { CreateActiveCartRequest } from '../model/createActiveCartRequest';
 import { CreateCartFees201Response } from '../model/createCartFees201Response';
 import { CreateCartFeesRequest } from '../model/createCartFeesRequest';
 import { CreateCartItems201Response } from '../model/createCartItems201Response';
 import { CreateCartItemsRequest } from '../model/createCartItemsRequest';
-import { CreateCartRequest } from '../model/createCartRequest';
 import { CreateCartSubscriptionItems201Response } from '../model/createCartSubscriptionItems201Response';
 import { CreateCartSubscriptionItemsRequest } from '../model/createCartSubscriptionItemsRequest';
 import { CreateCategoriesRequest } from '../model/createCategoriesRequest';
@@ -35,16 +31,18 @@ import { CreateProductRequest } from '../model/createProductRequest';
 import { CreateProductSiteRequest } from '../model/createProductSiteRequest';
 import { CreateProductSitesRequest } from '../model/createProductSitesRequest';
 import { CreateSubscriptionProduct201Response } from '../model/createSubscriptionProduct201Response';
+import { CreateSubscriptionProductCategoriesRequest } from '../model/createSubscriptionProductCategoriesRequest';
+import { CreateSubscriptionProductCategoryRequest } from '../model/createSubscriptionProductCategoryRequest';
 import { CreateSubscriptionProductRequest } from '../model/createSubscriptionProductRequest';
 import { CreateSubscriptionProductSiteRequest } from '../model/createSubscriptionProductSiteRequest';
 import { CreateSubscriptionProductSitesRequest } from '../model/createSubscriptionProductSitesRequest';
 import { ForbiddenError403Response } from '../model/forbiddenError403Response';
 import { GetActiveCarts200Response } from '../model/getActiveCarts200Response';
-import { GetCartByUserId201Response } from '../model/getCartByUserId201Response';
 import { GetFeeTypes200Response } from '../model/getFeeTypes200Response';
 import { GetFeesBySite200Response } from '../model/getFeesBySite200Response';
 import { GetProductCategories200Response } from '../model/getProductCategories200Response';
 import { GetProductSiteRecords200Response } from '../model/getProductSiteRecords200Response';
+import { GetSubscriptionProductCategories200Response } from '../model/getSubscriptionProductCategories200Response';
 import { GetSubscriptionProductSiteRecords200Response } from '../model/getSubscriptionProductSiteRecords200Response';
 import { InternalServerError500Response } from '../model/internalServerError500Response';
 import { NotFoundError404Response } from '../model/notFoundError404Response';
@@ -53,6 +51,7 @@ import { UpdateFeeRequest } from '../model/updateFeeRequest';
 import { UpdateProductCategoryRequest } from '../model/updateProductCategoryRequest';
 import { UpdateProductRequest } from '../model/updateProductRequest';
 import { UpdateProductSiteRequest } from '../model/updateProductSiteRequest';
+import { UpdateSubscriptionProductCategoryRequest } from '../model/updateSubscriptionProductCategoryRequest';
 import { UpdateSubscriptionProductRequest } from '../model/updateSubscriptionProductRequest';
 import { UpdateSubscriptionProductSiteRequest } from '../model/updateSubscriptionProductSiteRequest';
 
@@ -132,178 +131,6 @@ export class DefaultApi {
     }
 
     /**
-     * Add Lease Items to already existing cart.
-     * @summary Add Lease Items to Cart
-     * @param orgId The identifier of the organization.
-     * @param cartId The identifier of the shopping cart.
-     * @param addLeaseItemsRequest 
-     */
-    public async addLeaseItemsToCart (orgId: string, cartId: string, addLeaseItemsRequest: AddLeaseItemsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts/{cartId}/lease-items'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
-            .replace('{' + 'cartId' + '}', encodeURIComponent(String(cartId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling addLeaseItemsToCart.');
-        }
-
-        // verify required parameter 'cartId' is not null or undefined
-        if (cartId === null || cartId === undefined) {
-            throw new Error('Required parameter cartId was null or undefined when calling addLeaseItemsToCart.');
-        }
-
-        // verify required parameter 'addLeaseItemsRequest' is not null or undefined
-        if (addLeaseItemsRequest === null || addLeaseItemsRequest === undefined) {
-            throw new Error('Required parameter addLeaseItemsRequest was null or undefined when calling addLeaseItemsToCart.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(addLeaseItemsRequest, "AddLeaseItemsRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Checkout with the items in the cart.
-     * @summary Checkout.
-     * @param orgId The identifier of the organization.
-     * @param cartId The identifier of the shopping cart.
-     * @param checkoutRequest 
-     */
-    public async checkout (orgId: string, cartId: string, checkoutRequest: CheckoutRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts/{cartId}/checkout'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
-            .replace('{' + 'cartId' + '}', encodeURIComponent(String(cartId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling checkout.');
-        }
-
-        // verify required parameter 'cartId' is not null or undefined
-        if (cartId === null || cartId === undefined) {
-            throw new Error('Required parameter cartId was null or undefined when calling checkout.');
-        }
-
-        // verify required parameter 'checkoutRequest' is not null or undefined
-        if (checkoutRequest === null || checkoutRequest === undefined) {
-            throw new Error('Required parameter checkoutRequest was null or undefined when calling checkout.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(checkoutRequest, "CheckoutRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
      * Creates a cart.
      * @summary Create cart
      * @param orgId The identifier of the organization.
@@ -380,85 +207,6 @@ export class DefaultApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "GetActiveCarts200Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Creates a shopping cart.
-     * @summary Create cart
-     * @param orgId The identifier of the organization.
-     * @param createCartRequest 
-     */
-    public async createCart (orgId: string, createCartRequest: CreateCartRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling createCart.');
-        }
-
-        // verify required parameter 'createCartRequest' is not null or undefined
-        if (createCartRequest === null || createCartRequest === undefined) {
-            throw new Error('Required parameter createCartRequest was null or undefined when calling createCart.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(createCartRequest, "CreateCartRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -1401,6 +1149,164 @@ export class DefaultApi {
         });
     }
     /**
+     * Create multiple categories with products
+     * @summary Create multiple categories with products
+     * @param orgId The identifier of the organization that the subscription product category belongs to.
+     * @param createSubscriptionProductCategoriesRequest 
+     */
+    public async createSubscriptionProductCategoriesBatch (orgId: string, createSubscriptionProductCategoriesRequest: CreateSubscriptionProductCategoriesRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }> {
+        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/subscription-product-categories/batch'
+            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json;v=1'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'orgId' is not null or undefined
+        if (orgId === null || orgId === undefined) {
+            throw new Error('Required parameter orgId was null or undefined when calling createSubscriptionProductCategoriesBatch.');
+        }
+
+        // verify required parameter 'createSubscriptionProductCategoriesRequest' is not null or undefined
+        if (createSubscriptionProductCategoriesRequest === null || createSubscriptionProductCategoriesRequest === undefined) {
+            throw new Error('Required parameter createSubscriptionProductCategoriesRequest was null or undefined when calling createSubscriptionProductCategoriesBatch.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(createSubscriptionProductCategoriesRequest, "CreateSubscriptionProductCategoriesRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.bearer.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "GetSubscriptionProductCategories200Response");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Create a new subscription product category for an org and site
+     * @summary Create Subscription Product Category
+     * @param orgId The identifier of the organization that the subscription product category belongs to.
+     * @param createSubscriptionProductCategoryRequest 
+     */
+    public async createSubscriptionProductCategory (orgId: string, createSubscriptionProductCategoryRequest: CreateSubscriptionProductCategoryRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }> {
+        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/subscription-product-categories'
+            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json;v=1'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'orgId' is not null or undefined
+        if (orgId === null || orgId === undefined) {
+            throw new Error('Required parameter orgId was null or undefined when calling createSubscriptionProductCategory.');
+        }
+
+        // verify required parameter 'createSubscriptionProductCategoryRequest' is not null or undefined
+        if (createSubscriptionProductCategoryRequest === null || createSubscriptionProductCategoryRequest === undefined) {
+            throw new Error('Required parameter createSubscriptionProductCategoryRequest was null or undefined when calling createSubscriptionProductCategory.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(createSubscriptionProductCategoryRequest, "CreateSubscriptionProductCategoryRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.bearer.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "GetSubscriptionProductCategories200Response");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
      * 
      * @summary Create an association between subscription product definition and a site along with details such as, price, etc.
      * @param orgId The identifier of the organization.
@@ -1728,167 +1634,6 @@ export class DefaultApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "GetActiveCarts200Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Get a shopping cart by ID.
-     * @summary Get cart
-     * @param orgId The identifier of the organization.
-     * @param cartId The identifier of the shopping cart.
-     */
-    public async getCart (orgId: string, cartId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts/{cartId}'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
-            .replace('{' + 'cartId' + '}', encodeURIComponent(String(cartId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling getCart.');
-        }
-
-        // verify required parameter 'cartId' is not null or undefined
-        if (cartId === null || cartId === undefined) {
-            throw new Error('Required parameter cartId was null or undefined when calling getCart.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Get a shopping cart by userId.
-     * @summary Get cart
-     * @param orgId The identifier of the organization.
-     * @param userId User Id
-     */
-    public async getCartByUserId (orgId: string, userId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling getCartByUserId.');
-        }
-
-        // verify required parameter 'userId' is not null or undefined
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling getCartByUserId.');
-        }
-
-        if (userId !== undefined) {
-            localVarQueryParameters['userId'] = ObjectSerializer.serialize(userId, "string");
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -2544,6 +2289,167 @@ export class DefaultApi {
         });
     }
     /**
+     * Retrieve subscription subscription product categories for an org and site
+     * @summary Get Subscription Product Categories
+     * @param orgId The identifier of the organization that the subscription product category belongs to.
+     * @param offset The offset of the first record to return (0-indexed).
+     * @param limit The maximum number of records to return per page.
+     */
+    public async getSubscriptionProductCategories (orgId: string, offset?: number, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }> {
+        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/subscription-product-categories'
+            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json;v=1'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'orgId' is not null or undefined
+        if (orgId === null || orgId === undefined) {
+            throw new Error('Required parameter orgId was null or undefined when calling getSubscriptionProductCategories.');
+        }
+
+        if (offset !== undefined) {
+            localVarQueryParameters['offset'] = ObjectSerializer.serialize(offset, "number");
+        }
+
+        if (limit !== undefined) {
+            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.bearer.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "GetSubscriptionProductCategories200Response");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Retrieve subscription product category by ID
+     * @summary Get Subscription Product Category
+     * @param orgId The identifier of the organization that the subscription product category belongs to.
+     * @param subscriptionProductCategoryId The identifier of the subscription product category.
+     */
+    public async getSubscriptionProductCategory (orgId: string, subscriptionProductCategoryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }> {
+        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/subscription-product-categories/{subscriptionProductCategoryId}'
+            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
+            .replace('{' + 'subscriptionProductCategoryId' + '}', encodeURIComponent(String(subscriptionProductCategoryId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json;v=1'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'orgId' is not null or undefined
+        if (orgId === null || orgId === undefined) {
+            throw new Error('Required parameter orgId was null or undefined when calling getSubscriptionProductCategory.');
+        }
+
+        // verify required parameter 'subscriptionProductCategoryId' is not null or undefined
+        if (subscriptionProductCategoryId === null || subscriptionProductCategoryId === undefined) {
+            throw new Error('Required parameter subscriptionProductCategoryId was null or undefined when calling getSubscriptionProductCategory.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.bearer.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "GetSubscriptionProductCategories200Response");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
      * 
      * @summary Get subscription product site record along with its details(stock, price, currency, etc).
      * @param orgId The identifier of the organization.
@@ -2634,11 +2540,11 @@ export class DefaultApi {
      * @summary Get a subscription product site items for along with their details(stock, price, currency, etc).
      * @param orgId The identifier of the organization.
      * @param siteId The identifier of the site that the subscription product category belongs to.
-     * @param productCategoryId The identifier of the product category.
+     * @param subscriptionProductCategoryId The identifier of the subscription product category.
      * @param offset The offset of the first record to return (0-indexed).
      * @param limit The maximum number of records to return per page.
      */
-    public async getSubscriptionProductSiteRecords (orgId: string, siteId: string, productCategoryId: string, offset?: number, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductSiteRecords200Response;  }> {
+    public async getSubscriptionProductSiteRecords (orgId: string, siteId: string, subscriptionProductCategoryId: string, offset?: number, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductSiteRecords200Response;  }> {
         const localVarPath = this.basePath + '/commerce/orgs/{orgId}/sites/{siteId}/subscription-products'
             .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
             .replace('{' + 'siteId' + '}', encodeURIComponent(String(siteId)));
@@ -2663,9 +2569,9 @@ export class DefaultApi {
             throw new Error('Required parameter siteId was null or undefined when calling getSubscriptionProductSiteRecords.');
         }
 
-        // verify required parameter 'productCategoryId' is not null or undefined
-        if (productCategoryId === null || productCategoryId === undefined) {
-            throw new Error('Required parameter productCategoryId was null or undefined when calling getSubscriptionProductSiteRecords.');
+        // verify required parameter 'subscriptionProductCategoryId' is not null or undefined
+        if (subscriptionProductCategoryId === null || subscriptionProductCategoryId === undefined) {
+            throw new Error('Required parameter subscriptionProductCategoryId was null or undefined when calling getSubscriptionProductSiteRecords.');
         }
 
         if (offset !== undefined) {
@@ -2676,8 +2582,8 @@ export class DefaultApi {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
-        if (productCategoryId !== undefined) {
-            localVarQueryParameters['productCategoryId'] = ObjectSerializer.serialize(productCategoryId, "string");
+        if (subscriptionProductCategoryId !== undefined) {
+            localVarQueryParameters['subscriptionProductCategoryId'] = ObjectSerializer.serialize(subscriptionProductCategoryId, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -3005,264 +2911,6 @@ export class DefaultApi {
         });
     }
     /**
-     * Remove lease item for cart by PK.
-     * @summary Remove lease item for cart.
-     * @param orgId The identifier of the organization.
-     * @param cartId The identifier of the shopping cart.
-     * @param leaseItemId The identifier of the lease item associated with the shopping cart.
-     */
-    public async removeLeaseItem (orgId: string, cartId: string, leaseItemId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts/{cartId}/lease-items/{leaseItemId}'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
-            .replace('{' + 'cartId' + '}', encodeURIComponent(String(cartId)))
-            .replace('{' + 'leaseItemId' + '}', encodeURIComponent(String(leaseItemId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling removeLeaseItem.');
-        }
-
-        // verify required parameter 'cartId' is not null or undefined
-        if (cartId === null || cartId === undefined) {
-            throw new Error('Required parameter cartId was null or undefined when calling removeLeaseItem.');
-        }
-
-        // verify required parameter 'leaseItemId' is not null or undefined
-        if (leaseItemId === null || leaseItemId === undefined) {
-            throw new Error('Required parameter leaseItemId was null or undefined when calling removeLeaseItem.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Remove product item for cart by PK.
-     * @summary Remove product item for cart.
-     * @param orgId The identifier of the organization.
-     * @param cartId The identifier of the shopping cart.
-     * @param productItemId The identifier of the product item associated with the shopping cart.
-     */
-    public async removeProductItem (orgId: string, cartId: string, productItemId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts/{cartId}/items/{productItemId}'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
-            .replace('{' + 'cartId' + '}', encodeURIComponent(String(cartId)))
-            .replace('{' + 'productItemId' + '}', encodeURIComponent(String(productItemId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling removeProductItem.');
-        }
-
-        // verify required parameter 'cartId' is not null or undefined
-        if (cartId === null || cartId === undefined) {
-            throw new Error('Required parameter cartId was null or undefined when calling removeProductItem.');
-        }
-
-        // verify required parameter 'productItemId' is not null or undefined
-        if (productItemId === null || productItemId === undefined) {
-            throw new Error('Required parameter productItemId was null or undefined when calling removeProductItem.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Updated a shopping cart (with attributes such as accountId, paymentProviderId, etc).
-     * @summary Update cart.
-     * @param orgId The identifier of the organization.
-     * @param cartId The identifier of the shopping cart.
-     * @param createCartRequest 
-     */
-    public async updateCart (orgId: string, cartId: string, createCartRequest: CreateCartRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts/{cartId}'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
-            .replace('{' + 'cartId' + '}', encodeURIComponent(String(cartId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling updateCart.');
-        }
-
-        // verify required parameter 'cartId' is not null or undefined
-        if (cartId === null || cartId === undefined) {
-            throw new Error('Required parameter cartId was null or undefined when calling updateCart.');
-        }
-
-        // verify required parameter 'createCartRequest' is not null or undefined
-        if (createCartRequest === null || createCartRequest === undefined) {
-            throw new Error('Required parameter createCartRequest was null or undefined when calling updateCart.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(createCartRequest, "CreateCartRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
      * Update a organization level fee.
      * @summary Update a organization fee
      * @param orgId The Organization ID
@@ -3511,92 +3159,6 @@ export class DefaultApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "GetProductCategories200Response");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Add Product Items to already existing cart.
-     * @summary Add Product Items to Cart
-     * @param orgId The identifier of the organization.
-     * @param cartId The identifier of the shopping cart.
-     * @param addProductItemsRequest 
-     */
-    public async updateProductItems (orgId: string, cartId: string, addProductItemsRequest: AddProductItemsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }> {
-        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/carts/{cartId}/items'
-            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
-            .replace('{' + 'cartId' + '}', encodeURIComponent(String(cartId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json;v=1'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'orgId' is not null or undefined
-        if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling updateProductItems.');
-        }
-
-        // verify required parameter 'cartId' is not null or undefined
-        if (cartId === null || cartId === undefined) {
-            throw new Error('Required parameter cartId was null or undefined when calling updateProductItems.');
-        }
-
-        // verify required parameter 'addProductItemsRequest' is not null or undefined
-        if (addProductItemsRequest === null || addProductItemsRequest === undefined) {
-            throw new Error('Required parameter addProductItemsRequest was null or undefined when calling updateProductItems.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(addProductItemsRequest, "AddProductItemsRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.bearer.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetCartByUserId201Response;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetCartByUserId201Response");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -3869,6 +3431,92 @@ export class DefaultApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "CreateSubscriptionProduct201Response");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Updating a Subscription Product Category attributes (ex. name, description)
+     * @summary Updating a Subscription Product Category.
+     * @param orgId The identifier of the organization that the subscription product category belongs to.
+     * @param subscriptionProductCategoryId The identifier of the subscription product category.
+     * @param updateSubscriptionProductCategoryRequest 
+     */
+    public async updateSubscriptionProductCategory (orgId: string, subscriptionProductCategoryId: string, updateSubscriptionProductCategoryRequest: UpdateSubscriptionProductCategoryRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }> {
+        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/subscription-product-categories/{subscriptionProductCategoryId}'
+            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
+            .replace('{' + 'subscriptionProductCategoryId' + '}', encodeURIComponent(String(subscriptionProductCategoryId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json;v=1'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'orgId' is not null or undefined
+        if (orgId === null || orgId === undefined) {
+            throw new Error('Required parameter orgId was null or undefined when calling updateSubscriptionProductCategory.');
+        }
+
+        // verify required parameter 'subscriptionProductCategoryId' is not null or undefined
+        if (subscriptionProductCategoryId === null || subscriptionProductCategoryId === undefined) {
+            throw new Error('Required parameter subscriptionProductCategoryId was null or undefined when calling updateSubscriptionProductCategory.');
+        }
+
+        // verify required parameter 'updateSubscriptionProductCategoryRequest' is not null or undefined
+        if (updateSubscriptionProductCategoryRequest === null || updateSubscriptionProductCategoryRequest === undefined) {
+            throw new Error('Required parameter updateSubscriptionProductCategoryRequest was null or undefined when calling updateSubscriptionProductCategory.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(updateSubscriptionProductCategoryRequest, "UpdateSubscriptionProductCategoryRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.bearer.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: GetSubscriptionProductCategories200Response;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "GetSubscriptionProductCategories200Response");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

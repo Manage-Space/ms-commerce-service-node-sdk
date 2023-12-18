@@ -34,10 +34,6 @@ export class ProductResponse {
     */
     'productCategoryId': string;
     /**
-    * Payment provider ID
-    */
-    'paymentProviderId': string;
-    /**
     * Time of creation
     */
     'createdAt': Date;
@@ -80,11 +76,6 @@ export class ProductResponse {
         {
             "name": "productCategoryId",
             "baseName": "productCategoryId",
-            "type": "string"
-        },
-        {
-            "name": "paymentProviderId",
-            "baseName": "paymentProviderId",
             "type": "string"
         },
         {
