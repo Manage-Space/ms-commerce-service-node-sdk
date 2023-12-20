@@ -45,6 +45,10 @@ export class CartSubscriptionItemResponse {
     * Total Price of Subscription Item
     */
     'cartSubscriptionItemPrice': number;
+    /**
+    * Meta Data
+    */
+    'metaData': object | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -98,6 +102,11 @@ export class CartSubscriptionItemResponse {
             "name": "cartSubscriptionItemPrice",
             "baseName": "cartSubscriptionItemPrice",
             "type": "number"
+        },
+        {
+            "name": "metaData",
+            "baseName": "metaData",
+            "type": "object"
         }    ];
 
     static getAttributeTypeMap() {

@@ -21,6 +21,10 @@ export class CartSubscriptionItem {
     * Subscription Product ID
     */
     'subscriptionProductId'?: string;
+    /**
+    * Metadata.
+    */
+    'metaData'?: object;
 
     static discriminator: string | undefined = undefined;
 
@@ -34,6 +38,11 @@ export class CartSubscriptionItem {
             "name": "subscriptionProductId",
             "baseName": "subscriptionProductId",
             "type": "string"
+        },
+        {
+            "name": "metaData",
+            "baseName": "metaData",
+            "type": "object"
         }    ];
 
     static getAttributeTypeMap() {
