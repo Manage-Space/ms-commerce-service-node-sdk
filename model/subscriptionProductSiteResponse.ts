@@ -22,6 +22,10 @@ export class SubscriptionProductSiteResponse {
     */
     'price': number;
     /**
+    * Currency code
+    */
+    'currency': string;
+    /**
     * Product Category Id
     */
     'subscriptionProductCategoryId': string;
@@ -50,6 +54,11 @@ export class SubscriptionProductSiteResponse {
             "name": "price",
             "baseName": "price",
             "type": "number"
+        },
+        {
+            "name": "currency",
+            "baseName": "currency",
+            "type": "string"
         },
         {
             "name": "subscriptionProductCategoryId",
