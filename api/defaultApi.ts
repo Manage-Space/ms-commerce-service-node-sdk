@@ -1566,7 +1566,7 @@ export class DefaultApi {
     }
     /**
      * Get carts for current user.
-     * @summary Get carts
+     * @summary Get carts.
      * @param orgId The identifier of the organization.
      * @param siteId The identifier of the site.
      */
