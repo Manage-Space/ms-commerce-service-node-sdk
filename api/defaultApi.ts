@@ -23,6 +23,7 @@ import { CreateCartItems201Response } from '../model/createCartItems201Response'
 import { CreateCartItemsRequest } from '../model/createCartItemsRequest';
 import { CreateCartSubscriptionItems201Response } from '../model/createCartSubscriptionItems201Response';
 import { CreateCartSubscriptionItemsRequest } from '../model/createCartSubscriptionItemsRequest';
+import { CreateCartTaxesRequest } from '../model/createCartTaxesRequest';
 import { CreateCategoriesRequest } from '../model/createCategoriesRequest';
 import { CreateFeeRequest } from '../model/createFeeRequest';
 import { CreateProduct201Response } from '../model/createProduct201Response';
@@ -47,6 +48,7 @@ import { GetSubscriptionProductSiteRecords200Response } from '../model/getSubscr
 import { InternalServerError500Response } from '../model/internalServerError500Response';
 import { NotFoundError404Response } from '../model/notFoundError404Response';
 import { UnauthorizedError401Response } from '../model/unauthorizedError401Response';
+import { UpdateCartTax201Response } from '../model/updateCartTax201Response';
 import { UpdateFeeRequest } from '../model/updateFeeRequest';
 import { UpdateProductCategoryRequest } from '../model/updateProductCategoryRequest';
 import { UpdateProductRequest } from '../model/updateProductRequest';
@@ -2901,6 +2903,99 @@ export class DefaultApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Adding taxes to a cart.
+     * @summary Adding taxes to a cart.
+     * @param orgId The identifier of the organization.
+     * @param siteId The identifier of the site.
+     * @param cartId The identifier of the cart.
+     * @param createCartTaxesRequest 
+     */
+    public async updateCartTax (orgId: string, siteId: string, cartId: string, createCartTaxesRequest: CreateCartTaxesRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UpdateCartTax201Response;  }> {
+        const localVarPath = this.basePath + '/commerce/orgs/{orgId}/sites/{siteId}/carts/{cartId}/cart-taxes'
+            .replace('{' + 'orgId' + '}', encodeURIComponent(String(orgId)))
+            .replace('{' + 'siteId' + '}', encodeURIComponent(String(siteId)))
+            .replace('{' + 'cartId' + '}', encodeURIComponent(String(cartId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json;v=1'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'orgId' is not null or undefined
+        if (orgId === null || orgId === undefined) {
+            throw new Error('Required parameter orgId was null or undefined when calling updateCartTax.');
+        }
+
+        // verify required parameter 'siteId' is not null or undefined
+        if (siteId === null || siteId === undefined) {
+            throw new Error('Required parameter siteId was null or undefined when calling updateCartTax.');
+        }
+
+        // verify required parameter 'cartId' is not null or undefined
+        if (cartId === null || cartId === undefined) {
+            throw new Error('Required parameter cartId was null or undefined when calling updateCartTax.');
+        }
+
+        // verify required parameter 'createCartTaxesRequest' is not null or undefined
+        if (createCartTaxesRequest === null || createCartTaxesRequest === undefined) {
+            throw new Error('Required parameter createCartTaxesRequest was null or undefined when calling updateCartTax.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(createCartTaxesRequest, "CreateCartTaxesRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.bearer.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.bearer.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: UpdateCartTax201Response;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "UpdateCartTax201Response");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

@@ -15,5 +15,6 @@ import { RequestFile } from './models';
 export enum CartStatus {
     Active = <any> 'active',
     Abandoned = <any> 'abandoned',
-    Completed = <any> 'completed'
+    Completed = <any> 'completed',
+    InProgress = <any> 'in_progress'
 }

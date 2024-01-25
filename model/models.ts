@@ -10,11 +10,12 @@ export * from './cartFeeResponse';
 export * from './cartItem';
 export * from './cartItemResponse';
 export * from './cartItemStatus';
-export * from './cartItemTaxResponse';
 export * from './cartStatus';
 export * from './cartSubscriptionItem';
 export * from './cartSubscriptionItemResponse';
 export * from './cartSubscriptionItemUnitResponse';
+export * from './cartTaxRequestDto';
+export * from './cartTaxResponse';
 export * from './cartV2Response';
 export * from './createActiveCartRequest';
 export * from './createCartFees201Response';
@@ -23,6 +24,7 @@ export * from './createCartItems201Response';
 export * from './createCartItemsRequest';
 export * from './createCartSubscriptionItems201Response';
 export * from './createCartSubscriptionItemsRequest';
+export * from './createCartTaxesRequest';
 export * from './createCategoriesRequest';
 export * from './createFeeRequest';
 export * from './createProduct201Response';
@@ -63,6 +65,7 @@ export * from './subscriptionProductResponse';
 export * from './subscriptionProductSiteResponse';
 export * from './unauthorizedError401Response';
 export * from './unauthorizedError401ResponseError';
+export * from './updateCartTax201Response';
 export * from './updateFeeRequest';
 export * from './updateProductCategoryRequest';
 export * from './updateProductRequest';
@@ -94,11 +97,12 @@ import { CartFeeResponse } from './cartFeeResponse';
 import { CartItem } from './cartItem';
 import { CartItemResponse } from './cartItemResponse';
 import { CartItemStatus } from './cartItemStatus';
-import { CartItemTaxResponse } from './cartItemTaxResponse';
 import { CartStatus } from './cartStatus';
 import { CartSubscriptionItem } from './cartSubscriptionItem';
 import { CartSubscriptionItemResponse } from './cartSubscriptionItemResponse';
 import { CartSubscriptionItemUnitResponse } from './cartSubscriptionItemUnitResponse';
+import { CartTaxRequestDto } from './cartTaxRequestDto';
+import { CartTaxResponse } from './cartTaxResponse';
 import { CartV2Response } from './cartV2Response';
 import { CreateActiveCartRequest } from './createActiveCartRequest';
 import { CreateCartFees201Response } from './createCartFees201Response';
@@ -107,6 +111,7 @@ import { CreateCartItems201Response } from './createCartItems201Response';
 import { CreateCartItemsRequest } from './createCartItemsRequest';
 import { CreateCartSubscriptionItems201Response } from './createCartSubscriptionItems201Response';
 import { CreateCartSubscriptionItemsRequest } from './createCartSubscriptionItemsRequest';
+import { CreateCartTaxesRequest } from './createCartTaxesRequest';
 import { CreateCategoriesRequest } from './createCategoriesRequest';
 import { CreateFeeRequest } from './createFeeRequest';
 import { CreateProduct201Response } from './createProduct201Response';
@@ -147,6 +152,7 @@ import { SubscriptionProductResponse } from './subscriptionProductResponse';
 import { SubscriptionProductSiteResponse } from './subscriptionProductSiteResponse';
 import { UnauthorizedError401Response } from './unauthorizedError401Response';
 import { UnauthorizedError401ResponseError } from './unauthorizedError401ResponseError';
+import { UpdateCartTax201Response } from './updateCartTax201Response';
 import { UpdateFeeRequest } from './updateFeeRequest';
 import { UpdateProductCategoryRequest } from './updateProductCategoryRequest';
 import { UpdateProductRequest } from './updateProductRequest';
@@ -184,10 +190,11 @@ let typeMap: {[index: string]: any} = {
     "CartFeeResponse": CartFeeResponse,
     "CartItem": CartItem,
     "CartItemResponse": CartItemResponse,
-    "CartItemTaxResponse": CartItemTaxResponse,
     "CartSubscriptionItem": CartSubscriptionItem,
     "CartSubscriptionItemResponse": CartSubscriptionItemResponse,
     "CartSubscriptionItemUnitResponse": CartSubscriptionItemUnitResponse,
+    "CartTaxRequestDto": CartTaxRequestDto,
+    "CartTaxResponse": CartTaxResponse,
     "CartV2Response": CartV2Response,
     "CreateActiveCartRequest": CreateActiveCartRequest,
     "CreateCartFees201Response": CreateCartFees201Response,
@@ -196,6 +203,7 @@ let typeMap: {[index: string]: any} = {
     "CreateCartItemsRequest": CreateCartItemsRequest,
     "CreateCartSubscriptionItems201Response": CreateCartSubscriptionItems201Response,
     "CreateCartSubscriptionItemsRequest": CreateCartSubscriptionItemsRequest,
+    "CreateCartTaxesRequest": CreateCartTaxesRequest,
     "CreateCategoriesRequest": CreateCategoriesRequest,
     "CreateFeeRequest": CreateFeeRequest,
     "CreateProduct201Response": CreateProduct201Response,
@@ -236,6 +244,7 @@ let typeMap: {[index: string]: any} = {
     "SubscriptionProductSiteResponse": SubscriptionProductSiteResponse,
     "UnauthorizedError401Response": UnauthorizedError401Response,
     "UnauthorizedError401ResponseError": UnauthorizedError401ResponseError,
+    "UpdateCartTax201Response": UpdateCartTax201Response,
     "UpdateFeeRequest": UpdateFeeRequest,
     "UpdateProductCategoryRequest": UpdateProductCategoryRequest,
     "UpdateProductRequest": UpdateProductRequest,

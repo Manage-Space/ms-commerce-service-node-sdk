@@ -12,7 +12,6 @@
 
 import { RequestFile } from './models';
 import { CartItemStatus } from './cartItemStatus';
-import { CartItemTaxResponse } from './cartItemTaxResponse';
 import { ProductResponse } from './productResponse';
 import { ProductSiteResponse } from './productSiteResponse';
 
@@ -40,7 +39,6 @@ export class CartItemResponse {
     */
     'quantity': number;
     'cartItemStatus': CartItemStatus;
-    'cartItemTaxes': Array<CartItemTaxResponse>;
     /**
     * Total Price of Item(s) including Taxes
     */
@@ -88,11 +86,6 @@ export class CartItemResponse {
             "name": "cartItemStatus",
             "baseName": "cartItemStatus",
             "type": "CartItemStatus"
-        },
-        {
-            "name": "cartItemTaxes",
-            "baseName": "cartItemTaxes",
-            "type": "Array<CartItemTaxResponse>"
         },
         {
             "name": "cartItemPrice",

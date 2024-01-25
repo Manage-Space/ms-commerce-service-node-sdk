@@ -13,11 +13,12 @@ model/cartFeeResponse.ts
 model/cartItem.ts
 model/cartItemResponse.ts
 model/cartItemStatus.ts
-model/cartItemTaxResponse.ts
 model/cartStatus.ts
 model/cartSubscriptionItem.ts
 model/cartSubscriptionItemResponse.ts
 model/cartSubscriptionItemUnitResponse.ts
+model/cartTaxRequestDto.ts
+model/cartTaxResponse.ts
 model/cartV2Response.ts
 model/createActiveCartRequest.ts
 model/createCartFees201Response.ts
@@ -26,6 +27,7 @@ model/createCartItems201Response.ts
 model/createCartItemsRequest.ts
 model/createCartSubscriptionItems201Response.ts
 model/createCartSubscriptionItemsRequest.ts
+model/createCartTaxesRequest.ts
 model/createCategoriesRequest.ts
 model/createFeeRequest.ts
 model/createProduct201Response.ts
@@ -67,6 +69,7 @@ model/subscriptionProductResponse.ts
 model/subscriptionProductSiteResponse.ts
 model/unauthorizedError401Response.ts
 model/unauthorizedError401ResponseError.ts
+model/updateCartTax201Response.ts
 model/updateFeeRequest.ts
 model/updateProductCategoryRequest.ts
 model/updateProductRequest.ts

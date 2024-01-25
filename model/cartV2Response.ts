@@ -16,6 +16,7 @@ import { CartItemResponse } from './cartItemResponse';
 import { CartItemStatus } from './cartItemStatus';
 import { CartStatus } from './cartStatus';
 import { CartSubscriptionItemResponse } from './cartSubscriptionItemResponse';
+import { CartTaxResponse } from './cartTaxResponse';
 
 export class CartV2Response {
     /**
@@ -46,6 +47,7 @@ export class CartV2Response {
     'cartFees': Array<CartFeeResponse>;
     'cartItemsStatus': CartItemStatus;
     'cartTotal': number;
+    'cartTaxes': Array<CartTaxResponse>;
 
     static discriminator: string | undefined = undefined;
 
@@ -114,6 +116,11 @@ export class CartV2Response {
             "name": "cartTotal",
             "baseName": "cartTotal",
             "type": "number"
+        },
+        {
+            "name": "cartTaxes",
+            "baseName": "cartTaxes",
+            "type": "Array<CartTaxResponse>"
         }    ];
 
     static getAttributeTypeMap() {
